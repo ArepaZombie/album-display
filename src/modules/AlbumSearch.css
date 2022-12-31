@@ -1,0 +1,37 @@
+.album-search{
+  display: grid;
+  grid-template-columns: 20% 80%;
+  width: 80%;
+  margin: 10px auto;
+  gap: 10px;
+}
+
+
+
+.album-search .imagen{
+  width: 100%;
+}
+
+.album-search p{
+  margin: 0;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+.album-search .nombre{
+  font-size: 2rem;
+}
+
+.album-search .artista{
+
+}
+
+.album-search .año{
+
+}
+
+.album-search .sp{
+
+}
