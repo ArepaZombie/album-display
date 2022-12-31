@@ -1,6 +1,6 @@
-import './AlbumSearch.css'
+import './search/AlbumSearch.css'
 
-function AlbumSearch({nombre,artista,año,uri,imagen,tipo}){
+function AlbumDisplay({nombre,artista,año,uri,imagen,tipo,eliminarAlbum}){
   return(
     <div className="album-search">
       <img className="imagen" src={imagen}/>
@@ -12,9 +12,10 @@ function AlbumSearch({nombre,artista,año,uri,imagen,tipo}){
         rel="noopener noreferer" 
         className="sp">URI
         </a>
+        <p onClick={eliminarAlbum}>Eliminar album</p>
       </div>
     </div>
   )
 }
 
-export default AlbumSearch;
+export default AlbumDisplay;

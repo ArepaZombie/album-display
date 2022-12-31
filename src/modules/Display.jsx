@@ -1,58 +1,73 @@
-import { useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 
-import AlbumSearch from "./AlbumSearch";
+import AlbumDisplay from "./AlbumDisplay";
+import Ventana from "./search/Ventana";
+
+Storage.prototype.setObj = function(key, obj) {
+  return this.setItem(key, JSON.stringify(obj))
+}
+Storage.prototype.getObj = function(key) {
+  return JSON.parse(this.getItem(key))
+}
 
 function Display({setToken,token}){
-  const [albums,setAlbums] = useState([])
-  const [search, setSearch] = useState('')
+  const [showWindow, setShowWindow] = useState(false)
+  const [displayAlbums, setDisplayAlbums] = useState([])
+  
+  useEffect(()=>{
+    const albums = window.localStorage.getObj('albums')
+    if(albums.length>0) setDisplayAlbums(albums)
+  },[])
 
   const logOut = () =>{
     window.localStorage.removeItem('token')
     setToken('')
   }
 
-  const searchAlbum = async (e)=>{
-    e.preventDefault()
-    const {data} = await axios.get('https://api.spotify.com/v1/search',{
-      headers:{
-        Authorization:`Bearer ${token}`
-      },
-      params:{
-        q: search,
-        type:'album',
-        limit: 5
-      }
-    })
-
-    console.log(data)
-
-    setAlbums(data.albums.items)
+  const renderAlbums = () =>{
+    return displayAlbums.map(a=><AlbumDisplay 
+      eliminarAlbum={()=>eliminarAlbum(a.id)}
+      key={a.id}
+      id={a.id} 
+      nombre={a.name} 
+      artista={a.artista}
+      año={a.año}
+      imagen={a.imagen}
+      tipo={a.tipo}
+      uri={'https://open.spotify.com/album/'+a.id}/>
+      )
   }
 
-  const renderAlbums = () =>{
-    return albums.map((a)=><AlbumSearch 
-      key={a.id} 
-      nombre={a.name} 
-      artista={a.artists.map(a=>a.name).join(" - ")}
-      año={a.release_date.split('-')[0]}
-      imagen={a.images.length>=0?a.images[0].url:'#'}
-      tipo={a.album_type}
-      uri={'https://open.spotify.com/album/'+a.id}
-    />
-    )
+  const addAlbum = (a) =>{
+    console.log(a)
+    let temp = displayAlbums.slice()
+    temp.push(a)
+    setDisplayAlbums(temp)
+    window.localStorage.setObj('albums',temp)
+  }
+
+  const eliminarAlbum = (id)=>{
+    const temp = displayAlbums.filter(a=>a.id!==id)
+    setDisplayAlbums(temp)
+    window.localStorage.setObj('albums',temp)
+  }
+
+  const cleanAlbums = () =>{
+    setDisplayAlbums([])
+    window.localStorage.removeItem('album')
   }
 
   return(
     <div id="display">
       <p onClick={logOut}>Logueado!</p>
-      <form onSubmit={(e)=>searchAlbum(e)}>
-        <p>Hola</p>
-        <input type="text" onChange={e=>setSearch(e.target.value)}/>
-        <button type='submit'>Search</button>
-      </form> 
-
-      {renderAlbums()}
+      <p onClick={cleanAlbums}>Limpiar biblioteca</p>
+      <p onClick={()=>setShowWindow(true)}>Agregar album</p>
+      {displayAlbums.length>0 ? renderAlbums():<p>No hay albumes guardados :(</p>}
+      {showWindow && <Ventana 
+      token={token}
+      close={()=>setShowWindow(false)}
+      addAlbum={(a)=>addAlbum(a)}/>
+      }
     </div>
   )
 }

@@ -1,0 +1,53 @@
+#close{
+  background-color: rgb(209, 23, 23);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+  float: right;
+  border-radius: 100%;
+  padding: 10px 15px;
+  width: 40px;
+}
+
+#close:hover{
+  color: black;
+  background-color: rgb(240, 78, 78);
+  text-decoration: none;
+  transition: all 0.5s;
+}
+
+
+
+#sub-win{
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+  overflow: scroll;
+  text-align: left;
+  padding: 0;
+}
+
+#producto-content{
+  background-color: var(--azul);
+  color: white;
+  margin: 2% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 2px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  animation: animatetop;
+  animation-duration: 0.4s;
+}
+
+@keyframes animatetop {
+  from {transform: translateY(20px); opacity: 0}
+  to {transform: translateY(0px); opacity: 1}
+}
+
+.show{
+  display: block !important;
+}
