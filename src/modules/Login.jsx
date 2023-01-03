@@ -1,4 +1,4 @@
-
+import './Login.css'
 
 function Login(){
   
@@ -6,12 +6,13 @@ function Login(){
   const uri = 'http://localhost:5173'
   const url_log = 'https://accounts.spotify.com/authorize'
   const tipo= 'token'
+  const scope='playlist-modify-private'
 
   return(
   <div id="login">
     <p>Bienvenido a mi album display</p>
     <p>Por favor inicie sesion</p>
-    <a href={`${url_log}?client_id=${client}&redirect_uri=${uri}&response_type=${tipo}`}>Log in</a>
+    <a className='btn' href={`${url_log}?client_id=${client}&scope=${scope}&redirect_uri=${uri}&response_type=${tipo}`}>Log in</a>
   </div>
   )
 }

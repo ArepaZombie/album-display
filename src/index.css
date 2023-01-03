@@ -1,14 +1,73 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 2vw;
   
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: rgb(10, 10, 10);
+  background:#DCDFFF;
+  background-attachment: fixed;
+  overflow-x: hidden;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+body{
+  background-color: hsla(0, 0%, 100%, 0) !important;
+}
+
+
+:root{
+  --azul: #138C8C;
+  --verde: #03A678; 
+}
+
+a{
+  text-decoration: none;
+}
+
+body{
+  margin: 0;
+}
+
+.boton{
+  color: rgb(244, 242, 242);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3rem;
+  font-weight: 900;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  transform: translate(-1px,-1px);
+  box-shadow: 1px 1px rgb(0, 0, 0);
+}
+
+.boton.v{background-color: #03A678;}
+
+.boton.a{background-color: #138C8C;}
+
+.boton.r{background-color: #C2403E;}
+
+.boton:hover{
+  box-shadow: none;
+  opacity: 0.8;
+  transform: translate(0,0);
+}
+
+
+.spotify-link{
+  display: block;
+  color: #138C8C;
+  border: solid #138C8C;
+  box-shadow: none !important;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.spotify-link:hover{
+  background-color: #138C8C;
+  color: white;
 }

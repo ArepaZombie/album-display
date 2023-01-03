@@ -4,6 +4,10 @@ import axios from "axios";
 import AlbumSearch from "./AlbumSearch";
 import './Ventana.css'
 
+function camelCase(a){
+  return a.slice(0,1).toUpperCase()+a.slice(1)
+}
+
 function Ventana({token,close,addAlbum}){
   const [albums,setAlbums] = useState([])
   const [search,setSearch] = useState('')
@@ -54,7 +58,7 @@ function Ventana({token,close,addAlbum}){
       artista={a.artists.map(a=>a.name).join(" - ")}
       año={a.release_date.split('-')[0]}
       imagen={a.images.length>=0?a.images[0].url:'#'}
-      tipo={a.album_type}
+      tipo={camelCase(a.album_type)}
     />
     )
     return renderizeAlbums

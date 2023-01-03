@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
-import AlbumDisplay from "./AlbumDisplay";
+import AllDisplay from "./all_displays/AllDisplays";
+import OneDisplay from "./one_displays/OneDisplay";
 import Ventana from "./search/Ventana";
+
+import './Display.css'
+
 
 Storage.prototype.setObj = function(key, obj) {
   return this.setItem(key, JSON.stringify(obj))
@@ -13,7 +18,9 @@ Storage.prototype.getObj = function(key) {
 function Display({setToken,token}){
   const [showWindow, setShowWindow] = useState(false)
   const [displayAlbums, setDisplayAlbums] = useState([])
-  
+  const [showOffCanvas, setShowOffCanvas] = useState(false)
+  const [showOne, setShowOne] = useState(true)
+
   useEffect(()=>{
     const albums = window.localStorage.getObj('albums')
     if(albums.length>0) setDisplayAlbums(albums)
@@ -21,21 +28,8 @@ function Display({setToken,token}){
 
   const logOut = () =>{
     window.localStorage.removeItem('token')
+    setShowOffCanvas(false)
     setToken('')
-  }
-
-  const renderAlbums = () =>{
-    return displayAlbums.map(a=><AlbumDisplay 
-      eliminarAlbum={()=>eliminarAlbum(a.id)}
-      key={a.id}
-      id={a.id} 
-      nombre={a.name} 
-      artista={a.artista}
-      año={a.año}
-      imagen={a.imagen}
-      tipo={a.tipo}
-      uri={'https://open.spotify.com/album/'+a.id}/>
-      )
   }
 
   const addAlbum = (a) =>{
@@ -54,20 +48,47 @@ function Display({setToken,token}){
 
   const cleanAlbums = () =>{
     setDisplayAlbums([])
-    window.localStorage.removeItem('album')
+    setShowOffCanvas(false)
+    window.localStorage.setObj('albums',[])
   }
 
   return(
     <div id="display">
-      <p onClick={logOut}>Logueado!</p>
-      <p onClick={cleanAlbums}>Limpiar biblioteca</p>
-      <p onClick={()=>setShowWindow(true)}>Agregar album</p>
-      {displayAlbums.length>0 ? renderAlbums():<p>No hay albumes guardados :(</p>}
+      <nav>
+        <p onClick={()=>setShowOffCanvas(true)}>SIDE</p>
+        <p>Album Display</p>
+        <p id="agregar" onClick={()=>setShowWindow(true)}>Agregar album</p>
+      </nav>
+
+      <Offcanvas show={showOffCanvas} placement='start' onHide={()=>setShowOffCanvas(false)}>
+        <Offcanvas.Header closeButton closeLabel='X'>
+          <Offcanvas.Title>Opciones</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <p className="boton r" id="logout" onClick={logOut}>Log out</p>
+          <p className="boton r" id="limpiar" onClick={cleanAlbums}>Limpiar biblioteca</p>
+        </Offcanvas.Body>
+      </Offcanvas>
+
+      {showOne?
+      <OneDisplay 
+        albums={Array.from(displayAlbums)}
+        eliminarAlbum={eliminarAlbum}
+        changeView={()=>setShowOne(false)}/>
+      :
+      <AllDisplay 
+        albums={Array.from(displayAlbums)} 
+        eliminarAlbum={eliminarAlbum}
+        changeView={()=>setShowOne(true)}/>
+      }
+
       {showWindow && <Ventana 
       token={token}
       close={()=>setShowWindow(false)}
       addAlbum={(a)=>addAlbum(a)}/>
-      }
+    }
+
+    
     </div>
   )
 }
