@@ -1,0 +1,68 @@
+
+/*BIG DISPLAY*/
+#album-big-display{
+  display: grid;
+  grid-template-columns: 40% 60%;
+  margin: 10px auto;
+  width: 80%;
+  gap: 10px;
+}
+
+#album-big-display .imagen{
+  width: 100%;
+}
+
+#album-info p{
+  margin: 0;
+  overflow: hidden;
+  font-size: 1.5rem;
+  text-overflow:ellipsis;
+}
+
+#album-info .nombre{
+  font-size: 3rem;
+  line-height: 3rem;
+  height: 6.5rem;
+}
+
+#album-info .spotify-link{
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+#album-info .boton.r{
+  font-size: 2rem;
+  padding: auto;
+  aspect-ratio: 1/1;
+  float: right;
+}
+
+/*Little display*/
+#little-display{
+  width: 90%;
+  margin: 10px auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+}
+
+.album-little-display{
+  width: 100px;
+  transition: all 0.3s;
+}
+
+.album-little-display:hover{
+  transform: translate(-5px,-5px);
+  box-shadow: rgb(26, 26, 26) 5px 5px;
+}
+
+.album-little-display:active{
+  transform: translate(0,0);
+  box-shadow: none;
+}
+
+#little-display .boton{
+  grid-column: 1/4;
+  
+}
+

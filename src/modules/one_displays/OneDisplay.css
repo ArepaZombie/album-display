@@ -1,0 +1,42 @@
+.album-show{
+  width: 70%;
+  margin: auto;
+  text-align: center;
+}
+
+.album-cover{
+  width: 100%;
+}
+
+.album-name{
+  font-size: 4rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+white-space: nowrap;
+  
+}
+
+.album-artists{
+  font-size: 2rem;
+}
+
+.album-show .spotify-link{
+  width: 80%;
+  margin: auto;
+  font-size: 3rem;
+}
+.spotify-link{
+  border: none;
+}
+
+.album-show .r{
+  font-size: 2.5rem;
+  position: absolute;
+  top:0;
+  margin-left: -2.5rem;
+}
+
+.next{
+  color: var(--verde);
+  font-size: 4rem;
+}

@@ -1,0 +1,16 @@
+#login{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+#login a{
+  text-decoration: none;
+  color: white;
+  background-color:	#1db954;
+  font-size: 3rem;
+}
+
+#login p{
+  font-size: 3rem;
+}

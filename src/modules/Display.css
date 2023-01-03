@@ -1,0 +1,26 @@
+nav{
+  display: flex;
+  background-color: var(--azul);
+  margin: 0;
+  padding: 0 10px;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #eeeeee;
+}
+
+
+#sin-album{
+  font-size: 4rem;
+  margin: auto;
+  text-align: center;
+}
+
+#agregar{
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#agregar:hover{
+  text-shadow: black 0px 1px;
+  transform: translateY(-1px);
+}
