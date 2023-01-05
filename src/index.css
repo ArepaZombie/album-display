@@ -1,7 +1,7 @@
 :root {
   font-family: 'Rubik', sans-serif;
   font-size: 2vw;
-  
+  overflow-y: hidden;  
   color-scheme: light dark;
   color: rgb(10, 10, 10);
   background:#DCDFFF;
@@ -18,6 +18,27 @@ body{
   background-color: hsla(0, 0%, 100%, 0) !important;
 }
 
+*{
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar{
+  width: 5px;
+  background-color: rgb(19, 140, 140,0.5);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #138C8C;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #03A678;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background: rgb(3, 166, 120,0.5);
+}
 
 :root{
   --azul: #138C8C;
@@ -41,7 +62,6 @@ body{
   text-align: center;
   transition: all 0.2s;
   transform: translate(-1px,-1px);
-  box-shadow: 1px 1px rgb(0, 0, 0);
 }
 
 .boton.v{background-color: #03A678;}
@@ -70,4 +90,11 @@ body{
 .spotify-link:hover{
   background-color: #138C8C;
   color: white;
+}
+
+@media screen and (min-width:750px) {
+  :root{
+    font-size: 1vw;
+  }
+  
 }

@@ -6,6 +6,7 @@ footer{
   color: white;
   background-color: var(--azul);
   width: 100%;
+  position: fixed;
 }
 
 footer p{

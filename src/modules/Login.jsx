@@ -12,7 +12,7 @@ function Login(){
   <div id="login">
     <p>Bienvenido a mi album display</p>
     <p>Por favor inicie sesion</p>
-    <a className='btn' href={`${url_log}?client_id=${client}&scope=${scope}&redirect_uri=${uri}&response_type=${tipo}`}>Log in</a>
+    <a className='boton' href={`${url_log}?client_id=${client}&scope=${scope}&redirect_uri=${uri}&response_type=${tipo}`}>Log in</a>
   </div>
   )
 }

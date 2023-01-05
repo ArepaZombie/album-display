@@ -3,18 +3,24 @@ import Carousel from 'react-bootstrap/Carousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faCaretRight, faCaretLeft, faShuffle } from "@fortawesome/free-solid-svg-icons";
+import { motion, useAnimationControls } from "framer-motion";
 
 import './OneDisplay.css'
+import Ventana from "../search/Ventana";
 
-function OneDisplay({albums,changeView,eliminarAlbum}){
+function OneDisplay({albums,changeView,eliminarAlbum,token},props){
   const [index,setIndex] = useState(0)
+  const [round,setRound] = useState(false)
+  const [searchId, setSearchId] = useState('')
 
   const eliminarHandler = (id) =>{
     eliminarAlbum(id)
   }
 
+  const a = useAnimationControls()
   const selectRandom = () => {
     let i = setIndex(Math.floor(Math.random()*(albums.length-1)))
+    setRound(!round)
     while(i==index){
     i = setIndex(Math.floor(Math.random()*(albums.length-1)))
   }
@@ -28,12 +34,17 @@ function OneDisplay({albums,changeView,eliminarAlbum}){
           alt="album cover"
         />
         <FontAwesomeIcon icon={faTrashCan} className='boton r' onClick={()=>eliminarHandler(a.id)} />
+        <div>
         <h3 className='album-name'>{a.name}</h3>
-        <p className='album-artists'>by {a.artista}</p>
+        <p className='album-artists'>by {a.artistas.map((a,i)=><span 
+          onClick={()=>setSearchId(a.id)}
+          key={a.id} id={a.id}>{i>0&&'-'} {a.name} </span>)}
+        </p>
         <a href={'https://open.spotify.com/album/'+a.id} target='_blank'
           rel="noopener noreferer" 
           className="boton spotify-link">LISTEN IN SPOTIFY
         </a>
+        </div>
         </div>
       </Carousel.Item>
     )
@@ -43,9 +54,9 @@ function OneDisplay({albums,changeView,eliminarAlbum}){
   };
 
   return(
-  <div>
+  <div id='one-display'>
     
-    <p className="boton a"
+    <p className="boton a change-view"
     onClick={changeView}>see all albums</p>
     
     <Carousel 
@@ -59,11 +70,21 @@ function OneDisplay({albums,changeView,eliminarAlbum}){
       {albumsItems}
     </Carousel>
 
-    <p className="boton v"
-    onClick={selectRandom}>
+    <motion.p 
+    className="boton v" 
+    id="random"
+    onClick={selectRandom}
+    animate={{rotate:round?360:0}}
+    transition={{ duration: 0.2 ,ease:'easeInOut'}}>
       <FontAwesomeIcon icon={faShuffle}/>
-    </p>
-
+    </motion.p>
+    
+    {searchId.length>0 && <Ventana
+    token={token}
+    close={()=>{props.closeWindow;setSearchId('')}}
+    addAlbum={props.addAlbum}
+    searchid={searchId}
+    />}
   </div>
   )
 }

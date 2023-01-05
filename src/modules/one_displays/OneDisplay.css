@@ -1,28 +1,43 @@
+#one-display{
+  margin: 5rem auto;
+}
+
 .album-show{
-  width: 70%;
   margin: auto;
   text-align: center;
 }
 
+.album-show p,.album-name{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .album-cover{
-  width: 100%;
+  width: 70%;
 }
 
 .album-name{
   font-size: 4rem;
-  text-overflow: ellipsis;
-  overflow: hidden;
-white-space: nowrap;
-  
+  line-height: 5rem;
 }
 
-.album-artists{
+.album-artists span{
+  transition: all 0.2s;
   font-size: 2rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.album-artists span:hover{
+  color: var(--verde);
+  font-size: 2.5rem;
+  text-decoration-line:underline;
 }
 
 .album-show .spotify-link{
   width: 80%;
-  margin: auto;
+  margin: 1rem auto;
   font-size: 3rem;
 }
 .spotify-link{
@@ -39,4 +54,62 @@ white-space: nowrap;
 .next{
   color: var(--verde);
   font-size: 4rem;
+}
+
+#random{
+  font-size: 4rem;
+  width: 8rem;
+  margin: 10px auto;
+  padding: auto;
+  aspect-ratio: 1/1;
+  line-height: 8rem;
+  border-radius: 100%;
+}
+
+@media screen and (min-width:750px) {
+  .album-show{
+    width: 50%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 2rem;
+  }
+
+  .album-cover{
+    width: 100%;
+  }
+
+  #album-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  #album-info p{
+    overflow: visible;
+  }
+
+  .album-show div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .album-name{
+    font-size: 3rem;
+    line-height: 3rem;
+    overflow-wrap: break-word;
+    white-space: normal;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .spotify-link{
+    font-size: 1rem !important;
+  }
+
+  #random{
+    width: 4rem;
+    font-size: 2rem;
+    line-height: 4rem;
+  }
 }

@@ -4,10 +4,13 @@ import axios from "axios";
 
 import AlbumBigDisplay from "./AlbumBigDisplay";
 import AlbumLittleDisplay from "./AlbumLittleDisplay"; 
+import Ventana from '../search/Ventana';
 
-function AllDisplay({albums,eliminarAlbum,changeView}){
+
+function AllDisplay({albums,eliminarAlbum,changeView,token},props){
   const [albumSelected,setAlbumSelected]=useState()
-  
+  const [searchId,setSearchId] = useState('')
+
   useEffect(()=>{
     setAlbumSelected(albums[0])
   },[])
@@ -55,24 +58,32 @@ function AllDisplay({albums,eliminarAlbum,changeView}){
   } */
 
   return(
-      <div>
-      <p className="boton a"
+      <div id="all-display">
+      <p className="boton a change-view"
         onClick={changeView}>see one by one</p>
       {albumSelected && <AlbumBigDisplay
         eliminarAlbum={eliminarHandler}
         key={albumSelected.id}
         id={albumSelected.id} 
         nombre={albumSelected.name} 
-        artista={albumSelected.artista}
+        artistas={albumSelected.artistas}
         año={albumSelected.año}
         imagen={albumSelected.imagen}
         tipo={albumSelected.tipo}
-        uri={'https://open.spotify.com/album/'+albumSelected.id}/>}
+        uri={'https://open.spotify.com/album/'+albumSelected.id}
+        setSearchId={(a)=>setSearchId(a)}/>}
       
       <div id="little-display">
-        {albums.length>0 ? renderAlbums():<p id="sin-album">No hay albumes guardados :(</p>}
+        {renderAlbums()}
         {/* <p onClick={makePlaylist} className="boton v">make a playlist with all</p> */}
       </div>
+
+      {searchId.length>0 && <Ventana
+          token={token}
+          close={()=>{props.closeWindow;setSearchId('')}}
+          addAlbum={props.addAlbum}
+          searchid={searchId}
+        />}
 
     </div>
   )

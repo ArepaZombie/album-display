@@ -1,23 +1,28 @@
-#close{
-  background-color: rgb(209, 23, 23);
+#search-bar{
+  display: grid;
+  grid-template-columns: 95% auto;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#input{
+  border:none;
+  font-size: 2rem;
+  border-radius: 5px;
+}
+
+#search-bar .boton{
   color: white;
   font-weight: bold;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 2rem;
   float: right;
   border-radius: 100%;
-  padding: 10px 15px;
-  width: 40px;
+  aspect-ratio: 1/1;
+  padding: 5px;
+  grid-column: 2;
 }
-
-#close:hover{
-  color: black;
-  background-color: rgb(240, 78, 78);
-  text-decoration: none;
-  transition: all 0.5s;
-}
-
-
 
 #sub-win{
   position: fixed; /* Stay in place */
@@ -33,14 +38,14 @@
 }
 
 #producto-content{
-  background-color: var(--azul);
+  background-color: #111111;
   color: white;
   margin: 2% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 2px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
   animation: animatetop;
   animation-duration: 0.4s;
+  border-radius: 10px;
 }
 
 @keyframes animatetop {
@@ -50,4 +55,16 @@
 
 .show{
   display: block !important;
+}
+
+#controls{
+  font-size: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (min-width:750px) {
+  #producto-content{
+    width: 90%;
+  }
 }

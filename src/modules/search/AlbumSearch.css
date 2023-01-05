@@ -1,12 +1,11 @@
 .album-search{
   display: grid;
-  grid-template-columns: 20% 80%;
-  width: 80%;
+  grid-template-columns: 30% 70%;
+  width: 100%;
   margin: 10px auto;
+  overflow: hidden;
   gap: 10px;
 }
-
-
 
 .album-search .imagen{
   width: 100%;
@@ -14,24 +13,46 @@
 
 .album-search p{
   margin: 0;
-  margin-bottom: 10px;
   overflow: hidden;
-  text-overflow:ellipsis;
+  text-overflow:clip;
   white-space: nowrap;
+  font-size: 1.5rem;
 }
 
 .album-search .nombre{
   font-size: 2rem;
+  font-weight: 600;
 }
 
-.album-search .artista{
 
+.album-search .add{
+  color: white;
+  background-color: #095a6c;
+  width: 80%;
+  margin: auto;
+  font-weight: 100;
 }
 
-.album-search .año{
 
-}
+@media screen and (min-width:750px) {
+  #resultado-busqueda{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 1rem;
 
-.album-search .sp{
-
+  }
+  .album-search{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .album-search .nombre{
+    white-space: normal;
+    line-height: 2rem;
+    overflow-y: hidden;
+    height: 4.5rem;
+  }
+  .album-search .imagen{
+    width: 100%;
+  }
 }

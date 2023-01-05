@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import {motion} from 'framer-motion'
 
 import AllDisplay from "./all_displays/AllDisplays";
 import OneDisplay from "./one_displays/OneDisplay";
@@ -33,7 +36,6 @@ function Display({setToken,token}){
   }
 
   const addAlbum = (a) =>{
-    console.log(a)
     let temp = displayAlbums.slice()
     temp.push(a)
     setDisplayAlbums(temp)
@@ -55,9 +57,17 @@ function Display({setToken,token}){
   return(
     <div id="display">
       <nav>
-        <p onClick={()=>setShowOffCanvas(true)}>SIDE</p>
+        <p id='sub-menu' onClick={()=>setShowOffCanvas(true)}>
+          <FontAwesomeIcon icon={faBars}/>
+        </p>
         <p>Album Display</p>
-        <p id="agregar" onClick={()=>setShowWindow(true)}>Agregar album</p>
+        <motion.p 
+        whileHover={{
+          rotate:360,
+          scale:1.5,
+          transition:{duration:0.3}}}>
+          <FontAwesomeIcon icon={faCirclePlus} id="agregar" onClick={()=>setShowWindow(true)}/>
+        </motion.p>
       </nav>
 
       <Offcanvas show={showOffCanvas} placement='start' onHide={()=>setShowOffCanvas(false)}>
@@ -65,27 +75,38 @@ function Display({setToken,token}){
           <Offcanvas.Title>Opciones</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <p className="boton r" id="logout" onClick={logOut}>Log out</p>
-          <p className="boton r" id="limpiar" onClick={cleanAlbums}>Limpiar biblioteca</p>
+          <p className="off-canvas" id="logout" onClick={logOut}>Log out</p>
+          <p className="off-canvas" id="limpiar" onClick={cleanAlbums}>Limpiar biblioteca</p>
         </Offcanvas.Body>
       </Offcanvas>
 
-      {showOne?
+      {displayAlbums.length>0? showOne?
       <OneDisplay 
         albums={Array.from(displayAlbums)}
         eliminarAlbum={eliminarAlbum}
-        changeView={()=>setShowOne(false)}/>
+        changeView={()=>setShowOne(false)}
+        token={token}
+        closeWindow={()=>setShowWindow(false)}
+        addAlbum={(a)=>addAlbum(a)}
+        />
       :
       <AllDisplay 
         albums={Array.from(displayAlbums)} 
         eliminarAlbum={eliminarAlbum}
-        changeView={()=>setShowOne(true)}/>
+        changeView={()=>setShowOne(true)}
+        token={token}
+        closeWindow={()=>setShowWindow(false)}
+        addAlbum={(a)=>addAlbum(a)}
+        />
+        :
+        <p id="sin-album">No hay albumes guardados :(</p>
       }
 
       {showWindow && <Ventana 
       token={token}
       close={()=>setShowWindow(false)}
-      addAlbum={(a)=>addAlbum(a)}/>
+      addAlbum={(a)=>addAlbum(a)}
+      searchid={false}/>
     }
 
     
