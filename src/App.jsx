@@ -51,7 +51,10 @@ function App() {
       <Display setToken={()=>setToken()} token={token}/>
     }
     <footer>
-      <p>Made by <a>ArepaZombie</a></p>
+      <p>Made by <a 
+      href='https://github.com/ArepaZombie'
+      rel='noopener noreferer'
+      target='_blank'>ArepaZombie</a></p>
     </footer>
   </div>
   )
