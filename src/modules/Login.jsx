@@ -3,7 +3,7 @@ import './Login.css'
 function Login(){
   
   const client = '4f254b2a1f574a64bd53789db6bd5490'
-  const uri = 'http://localhost:5173'
+  const uri = 'https://arepazombie.github.io/album-display/'
   const url_log = 'https://accounts.spotify.com/authorize'
   const tipo= 'token'
   const scope='playlist-modify-private'
