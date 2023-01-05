@@ -26,7 +26,7 @@ function Display({setToken,token}){
 
   useEffect(()=>{
     const albums = window.localStorage.getObj('albums')
-    if(albums.length>0) setDisplayAlbums(albums)
+    if(albums!==null) setDisplayAlbums(albums)
   },[])
 
   const logOut = () =>{
